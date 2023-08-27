@@ -1,4 +1,10 @@
-type NestedType = NestedType[] | { [key: string]: NestedType } | string | boolean | number | null;
+type NestedType =
+  | NestedType[]
+  | { [key: string]: NestedType }
+  | string
+  | boolean
+  | number
+  | null;
 
 export function deepCopy<U extends NestedType>(input: U): U {
   if (!input) {
@@ -15,5 +21,5 @@ export function deepCopy<U extends NestedType>(input: U): U {
     return Object.fromEntries(clonedPairs) as U;
   }
 
-  return input
+  return input;
 }
