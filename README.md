@@ -15,9 +15,7 @@ This is my technical test for AdSecure.
 
 [![Node][Nodejs.org]][Nodejs-url]
 
-### Exercises
-
-Exercise 1:
+### Exercise 1:
 
 Task: Implement a utility function that accepts an array of objects and returns a deep copy of
 the input array. The input objects may contain nested objects, arrays, or primitive data types.
@@ -27,9 +25,7 @@ Resolution:
 
 The exercise implementation can be found under ./src/utils/data.utils.ts
 
-
-<br>
-Exercise 2:
+### Exercise 2:
 
 Task: Design a schema for a DynamoDB table that stores metadata about web pages crawled
 by our solution. The schema should support efficient querying for a given URL, date range, or a
@@ -39,7 +35,7 @@ data using the AWS SDK for JavaScript.
 A document with an overview of the problem can be found under ./documentation/exercise2.pdf.
 The document provides the design for the DynamoDB table. Example queries can be found in the exercise 3 implementation.
 
-Exercise 3:
+### Exercise 3:
 
 Task: Design a GraphQL schema for the web page metadata stored in the DynamoDB table.
 Implement a GraphQL server in TypeScript using AWS AppSync or any other preferred library
