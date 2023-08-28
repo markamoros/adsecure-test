@@ -8,6 +8,21 @@ export class DynamoDBWrapper<T extends Record<string, unknown>> {
     this.documentClient = new DynamoDB.DocumentClient();
   }
 
+  public async queryItems(
+    tableName: string,
+    queryInput: DocumentClient.QueryInput,
+  ): Promise<T[]> {
+    queryInput.TableName = tableName;
+
+    try {
+      const result = await this.documentClient.query(queryInput).promise();
+      return result.Items as T[];
+    } catch (error) {
+      console.error('Error querying data:', error);
+      throw new Error(`Unable to query items from table ${tableName}`);
+    }
+  }
+
   public async putItem(tableName: string, item: T): Promise<void> {
     const params: DocumentClient.PutItemInput = {
       TableName: tableName,
@@ -22,18 +37,17 @@ export class DynamoDBWrapper<T extends Record<string, unknown>> {
     }
   }
 
-  public async queryItems(
+  public async updateItem(
     tableName: string,
-    queryInput: DocumentClient.QueryInput,
-  ): Promise<T[]> {
-    queryInput.TableName = tableName;
+    updateInput: DocumentClient.UpdateItemInput,
+  ): Promise<void> {
+    updateInput.TableName = tableName;
 
     try {
-      const result = await this.documentClient.query(queryInput).promise();
-      return result.Items as T[];
+      await this.documentClient.update(updateInput).promise();
     } catch (error) {
-      console.error('Error querying data:', error);
-      throw new Error(`Unable to query items from table ${tableName}`);
+      console.error('Error updating data:', error);
+      throw new Error(`Unable to update item in table ${tableName}`);
     }
   }
 }

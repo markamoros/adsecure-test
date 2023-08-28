@@ -1,0 +1,41 @@
+# Queries
+query GetSpecificFields {
+    getCrawledData(filter: {url: "https://example.com", wordCount: {minCount: 100, maxCount: 500}}, fields: ["id", "url"], limit: 10, offset: 0) {
+        id
+        url
+    }
+}
+
+# Query to get all available fields with filters, limit, and offset
+query GetAllFields {
+    getCrawledData(filter: {url: "https://example.com", wordCount: {minCount: 100, maxCount: 500}}, limit: 10, offset: 0) {
+        id
+        url
+        pageTitle
+        wordCount
+        timestamp
+    }
+}
+
+# Mutations
+
+mutation AddCrawledData {
+    addCrawledData(input: {url: "https://newsite.com", pageTitle: "New Site", wordCount: 300}) {
+        id
+        url
+        pageTitle
+        wordCount
+        timestamp
+    }
+}
+
+# Mutation to update existing crawled data by ID
+mutation UpdateCrawledData {
+    updateCrawledData(id: "someId", input: {url: "https://updatedsite.com", pageTitle: "Updated Site", wordCount: 400}) {
+        id
+        url
+        pageTitle
+        wordCount
+        timestamp
+    }
+}

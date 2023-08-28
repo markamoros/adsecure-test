@@ -1,0 +1,50 @@
+# Inputs
+input CrawledDataInput {
+  url: String!
+  pageTitle: String
+  wordCount: Int
+  timestamp: Int
+}
+
+input CrawledDataFilter {
+  url: String
+  pageTitle: String
+  wordCount: NumberRange
+  dateRange: DateRange
+}
+
+input DateRange {
+  startDate: String
+  endDate: String
+}
+
+input NumberRange {
+  minCount: Int
+  maxCount: Int
+}
+
+# Types
+type CrawledData {
+  id: ID
+  url: String
+  pageTitle: String
+  wordCount: Int
+  timestamp: Int
+}
+
+# Mutations
+type Mutation {
+  addCrawledData(input: CrawledDataInput): CrawledData
+  updateCrawledData(id: ID!, input: CrawledDataInput): CrawledData
+  deleteCrawledData(id: ID!): Boolean
+}
+
+# Queries
+type Query {
+  getCrawledData(
+    filter: CrawledDataFilter
+    fields: [String!]
+    limit: Int
+    offset: Int
+  ): [CrawledData]
+}
